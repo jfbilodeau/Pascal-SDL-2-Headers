@@ -131,7 +131,7 @@ unit SDL2;
 
 interface
 
-  {$IF DEFINED(DELPHI) AND DEFINE(LINUX)}
+  {$IF DEFINED(DELPHI) AND DEFINED(LINUX)}
   {$DEFINE DELPHI_LINUX}
   {$ENDIF}
 
@@ -154,6 +154,17 @@ interface
       XLib,
       CocoaAll;
   {$ENDIF}
+
+type
+  {IFDEF DELPHI_LINUX}
+    // Delphi on Linux does not have Ansi strings.
+    // Use UTF-8 instead.
+    AnsiString = UTF8String;
+    PAnsiString = PUTF8String;
+    AnsiChar = UTF8Char;
+    PAnsiChar = PUTF8Char;
+  {ENDIF}
+
 
 const
 

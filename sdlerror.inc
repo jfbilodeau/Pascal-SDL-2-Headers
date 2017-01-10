@@ -23,6 +23,11 @@ procedure SDL_ClearError cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MAC
    }
 type
 
+  {$IFDEF DELPHI_LINUX}
+  TSDLErrorMessage = array[0..ERR_MAX_STRLEN-1] of UTF8Char;
+  {$ELSE}
+  TSDLErrorMessage =  String[ERR_MAX_STRLEN]; { Should that no be AnsiString? }
+  {$ENDIF}
 
   TSDL_ErrorCode = (SDL_ENOMEM,
                     SDL_EFREAD,
@@ -40,7 +45,7 @@ type
        is not in the hashtable, or no hashtable is available, the key is
        used directly as an error message format string.
      *}
-    key: String[ERR_MAX_STRLEN];
+    key: TSDLErrorMessage;
 
     {* These are the arguments for the error functions *}
     argc: SInt32;
@@ -50,7 +55,7 @@ type
       1: (value_ptr: Pointer;);
       2: (value_i: SInt32;);
       3: (value_f: Double;);
-      4: (buf: String[ERR_MAX_STRLEN];);
+      4: (buf: TSDLErrorMessage;);
   end;
 
   {* SDL_Error() unconditionally returns -1. *}

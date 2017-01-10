@@ -41,6 +41,7 @@ Type
       lParam: LPARAM; {**< WORD message parameter *}
    end;
 {$ENDIF}
+{$IFNDEF DELPHI_LINUX}  {No support for X11 or DirectFB API yet }
 {$IFDEF SDL_VIDEO_DRIVER_X11}
    __SYSWM_X11 = record
       event: {$IFDEF FPC} TXEvent {$ELSE} XEvent {$ENDIF};
@@ -50,6 +51,7 @@ Type
    __SYSWM_DIRECTFB = record
       event: DFBEvent;
    end;
+{$ENDIF}
 {$ENDIF}
 {$IFDEF SDL_VIDEO_DRIVER_COCOA}
    __SYSWM_COCOA = record
@@ -74,11 +76,13 @@ Type
          {$IFDEF SDL_VIDEO_DRIVER_WINDOWS}
             SDL_SYSWM_WINDOWS: (win: __SYSWM_WINDOWS);
          {$ENDIF}
+         {$IFNDEF DELPHI_LINUX}  {No support for X11 or DirectFB API yet }
          {$IFDEF SDL_VIDEO_DRIVER_X11}
             SDL_SYSWM_X11: (x11: __SYSWM_X11);
          {$ENDIF}
-         {$IFDEF SDL_VIDEO_DRIVER_DIRECTFB}  
-            SDL_SYSWM_DIRECTFB: (dfb: __SYSWM_DIRECTFB); 
+         {$IFDEF SDL_VIDEO_DRIVER_DIRECTFB}
+            SDL_SYSWM_DIRECTFB: (dfb: __SYSWM_DIRECTFB);
+         {$ENDIF}
          {$ENDIF}
          {$IFDEF SDL_VIDEO_DRIVER_COCOA}  
             SDL_SYSWM_COCOA: (cocoa: __SYSWM_COCOA);
@@ -100,6 +104,8 @@ Type
       window: IInspectable;      {**< The WinRT CoreWindow *}
    end;
 {$ENDIF}
+
+{$IFNDEF DELPHI_LINUX}  {No support for X11 or DirectFB API yet }
 {$IFDEF SDL_VIDEO_DRIVER_X11}
    __WMINFO_X11 = record
       display: PDisplay;  {**< The X11 display *}
@@ -113,6 +119,8 @@ Type
       surface: IDirectFBSurface;  {**< The directfb client surface *}
    end;
 {$ENDIF}
+{$ENDIF}
+
 {$IFDEF SDL_VIDEO_DRIVER_COCOA}
    __WMINFO_COCOA = record
       window: NSWindow;           {* The Cocoa window *}
@@ -161,11 +169,13 @@ Type
          {$IFDEF SDL_VIDEO_DRIVER_WINRT}
             SDL_SYSWM_WINRT: (winrt : __WMINFO_WINRT);
          {$ENDIF}
+         {$IFNDEF DELPHI_LINUX}  {No support for X11 or DirectFB API yet }
          {$IFDEF SDL_VIDEO_DRIVER_X11}
             SDL_SYSWM_X11: (x11 : __WMINFO_X11);
          {$ENDIF}
          {$IFDEF SDL_VIDEO_DRIVER_DIRECTFB}
             SDL_SYSWM_DIRECTFB: (dfb : __WMINFO_DFB);
+         {$ENDIF}
          {$ENDIF}
          {$IFDEF SDL_VIDEO_DRIVER_COCOA}
             SDL_SYSWM_COCOA: (cocoa : __WMINFO_COCOA);
