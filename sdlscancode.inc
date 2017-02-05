@@ -363,7 +363,7 @@ const
 
 type
   PSDL_ScanCode = ^TSDL_ScanCode;
-  TSDL_ScanCode = DWord;
+  TSDL_ScanCode = SInt16;  // JF: Needs to be 16 bit (not DWord)
 
   //from "sdl_keycode.h"
 

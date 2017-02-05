@@ -415,7 +415,7 @@
    {$DEFINE Has_UInt64}
    {$DEFINE Has_Native}
    {$DEFINE HAS_TYPES}
-{$IFEND}
+{$ENDIF}
 {$ENDIF}
 	  
 {*************** define 16/32/64 Bit ********************}
