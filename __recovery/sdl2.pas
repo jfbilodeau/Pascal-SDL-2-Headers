@@ -407,7 +407,7 @@ end;
 
 //from "sdl_audio.h"
 
-function SDL_LoadWAV(_file: PAnsiChar; spec: PSDL_AudioSpec; audio_buf: PPUInt8; audio_len: PUInt32): PSDL_AudioSpec;
+function SDL_LoadWAV(_file: PUTF8Char; spec: PSDL_AudioSpec; audio_buf: PPUInt8; audio_len: PUInt32): PSDL_AudioSpec;
 begin
   Result := SDL_LoadWAV_RW(SDL_RWFromFile(_file, 'rb'), 1, spec, audio_buf, audio_len);
 end;
@@ -481,14 +481,14 @@ begin
 end;
 
 //from "sdl_surface.h"
-function SDL_LoadBMP(_file: PAnsiChar): PSDL_Surface;
+function SDL_LoadBMP(_file: PUTF8Char): PSDL_Surface;
 begin
   Result := SDL_LoadBMP_RW(SDL_RWFromFile(_file, 'rb'), 1);
 end;
 
-function SDL_SaveBMP(Const surface:PSDL_Surface; Const filename:AnsiString):sInt32;
+function SDL_SaveBMP(Const surface:PSDL_Surface; Const filename:UTF8String):SInt32;
 begin
-   Result := SDL_SaveBMP_RW(surface, SDL_RWFromFile(PAnsiChar(filename), 'wb'), 1)
+   Result := SDL_SaveBMP_RW(surface, SDL_RWFromFile(PUTF8Char(filename), 'wb'), 1)
 end;
 
 {**
@@ -527,7 +527,7 @@ end;
   {**
    *  Load a set of mappings from a file, filtered by the current SDL_GetPlatform()
    *}
-function SDL_GameControllerAddMappingsFromFile(Const FilePath:PAnsiChar):SInt32;
+function SDL_GameControllerAddMappingsFromFile(Const FilePath:PUTF8Char):SInt32;
 begin
   Result := SDL_GameControllerAddMappingsFromRW(SDL_RWFromFile(FilePath, 'rb'), 1)
 end;

@@ -29,11 +29,11 @@ type
   {$EXTERNALSYM UInt32}
 
   PSInt32 = ^SInt32;
-  SInt32 = LongInt;
+  SInt32 = Integer; // JF: LongInt size varies. Integer always 32 bits
   {$EXTERNALSYM SInt32}
 
   PFloat = ^Float;
-  PInt = ^LongInt;
+  PInt = ^Integer; // JF: LongInt size varies. Integer always 32 bits
 
   PShortInt = ^ShortInt;
 
